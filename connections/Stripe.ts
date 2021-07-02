@@ -12,14 +12,19 @@ import {
 
 import HttpClient from '../common/HTTPClient';
 
+import 'dotenv/config';
+
+const accountId: string = process.env.STRIPE_AC;
+const apiKey: string = process.env.STRIPE_API_KEY;
+
 const StripeConnection: ProcessorConnection<APIKeyCredentials, CardDetails> = {
   name: 'STRIPE',
 
   website: 'stripe.com',
 
   configuration: {
-    accountId: 'acct_1J8PkyLFGGjzPuCh',
-    apiKey: 'pk_test_51J8PkyLFGGjzPuChca34YNSzUigYRFogm5da2ghwXOvQhV6TZILX9FVgepKQtlHWzttaHcvsgqG5QYPBKEDsEvwU00fihiQADU',
+    accountId: accountId,
+    apiKey: apiKey,
   },
 
   /**
