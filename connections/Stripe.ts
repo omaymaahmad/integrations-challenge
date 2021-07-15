@@ -96,7 +96,7 @@ const StripeConnection: ProcessorConnection<APIKeyCredentials, CardDetails> = {
       'Authorization': 'Bearer ${request.processorConfig.apiKey}',
     };
 
-    // const url: string = 'https://api.stripe.com/v1/payment_methods/capture';
+    // const url: string = 'https://api.stripe.com/v1/payment_intents/${request.processorTransactionId}/capture';
 
     // const options: HTTPRequest = {
     // method: 'post',
@@ -119,6 +119,23 @@ const StripeConnection: ProcessorConnection<APIKeyCredentials, CardDetails> = {
   cancel(
     request: RawCancelRequest<APIKeyCredentials>,
   ): Promise<ParsedCancelResponse> {
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer ${request.processorConfig.apiKey}',
+    };
+
+    //const url: string = 'https://api.stripe.com/v1/payment_intents/${request.processorTransactionId}/cancel';
+
+    // const options: HTTPRequest = {
+    // method: 'post',
+    //body: '',
+    // headers: headers,
+    //};
+
+    //const responseCapture: HTTPResponse = HttpClient.request(
+    // url,
+    //options,
+    // );
     throw new Error('Method Not Implemented');
   },
 };
