@@ -1,39 +1,48 @@
 # Connections - Processors
 
-For this exercise you'll be implementing a Processor connection using Stripe's API
+As stated in the challenge description I began by educating myself on how the life cycle of a transaction. I watched YouTube videos and read articles primiarly, this provided me with the information that a transaction initially goes through:
 
-**Note:** you are required to **not** use Stripe's node SDK.
+1. Authorization -> the customers bank will approve method and check for sufficient funds.
+2. Capture / Settlement -> as authorizations expire a submit for settlekent is required.
+3. Settling -> a transitory state in which the payment is processed.
+4. Settled -> funds are transferred from the customers bank account to the merchant account.
 
-## Set up
+## Stripe API and Documentation
 
-You'll need to create an account with [Stripe](https://dashboard.stripe.com/login) and log in to the dashboard.
-Once you've done that, you should be able to find an API Key in the developer section.
+After gathering my background I created my account with Stripe and read up on the documentaiton surrounding the API. The site had loads of helpful documentation surrounding how to implement the API in various ways including the SDK information.
+The site informs users that the API has predictable resource-oriented URLs, accepted form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
+
+From using Postman to understand how the Stripe API works I learned the API accepts form-data. Meaning when utilising POST methods the Content-Type header should be set to application/x-www-form-urlencoded --> as the data is encoded.
+
+## Authorize()
+
+The Stripe Docs provided an example of the Authorization object repsonse. Showing a transaction ID, amount, status and other details.
+
+The Developers tab provided the API keys: one public and one secret.
+
+The API is set a [paymentIntent] to captured after they are authorized.
+The [payment_method_data] parameter is hard-coded to [card] and is a hash object. Card objects may be attached to this hash.
+By setting the [payment_method_data] the [payment_method] is set with the card details provided (such as card number, cvv, and expiration date).
+
+The status parameter will be set to [requires_capture] on the [paymentIntent] object.
+
+## Capture()
+
+Payments can only be captured once Authorized.
+The [capture] function requires the [paymentIntent] id of the [paymentIntent] you wish to capture.
+The status parameter will be set to succeeded on the returned paymentIntent object.
+
+## Cancel()
+
+Requires the [paymentIntent] id of the [paymentIntent] you wish to [cancel].
+The status parameter will be set to canceled on the returned paymentIntent object.
 
 ## Get stuck in
 
-There are 4 parts to the exercise:
+-
 
-- Add your sandbox credentials to `Stripe.ts`
-- Implement the `authorize()` method in `Stripe.ts`
-- Implement the `capture()` method in `Stripe.ts`
-- Implement the `cancel()` method in `Stripe.ts`
+## My Experience
 
-Feel free to tackle these in the order that makes most sense to you.
+This was my first time working with TypeScript, I faced a multitude of challenges adapting from JavaScript to Typscript primarily adapting to the syntax. Another huge challenge was the inability to use the Stripe SDK, all my previous projects incorporating API's have used the given SDK's and so I had to really research the Stripe Docs and API to understand how to make calls. I enjoyed the challenge of not using the SDK as I feel, though I might not have completed the challenge, I pushed myself to gain a new skill.
 
-### Tips
-
-- Check out Stripe's PaymentIntents API
-- There is an `HTTPClient` implementation in `./common` that you may use, we've already imported it into `Stripe.ts` for you. Remember though, you can't use Stripe's SDK.
-- If anything is unclear, Don't hesitate to reach out
-
-## Run the example
-
-To run the program use the following command:
-
-```bash
-yarn start:processors
-```
-
-Happy Coding :D
-
-![Code](https://media.tenor.com/images/8460465dd4597849c320adfe461e91e3/tenor.gif)
+I believe with the guidance of a senior engineer and more experience with TypeScript I would be able to complete this challenge. Nevertheless, I think with my limited experience and skill set I was able to really test my skills and see what I am capable of when working completely alone.
