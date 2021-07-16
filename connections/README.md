@@ -37,10 +37,6 @@ The status parameter will be set to succeeded on the returned paymentIntent obje
 Requires the [paymentIntent] id of the [paymentIntent] you wish to [cancel].
 The status parameter will be set to canceled on the returned paymentIntent object.
 
-## Get stuck in
-
--
-
 ## My Experience
 
 This was my first time working with TypeScript, I faced a multitude of challenges adapting from JavaScript to Typscript primarily adapting to the syntax. Another huge challenge was the inability to use the Stripe SDK, all my previous projects incorporating API's have used the given SDK's and so I had to really research the Stripe Docs and API to understand how to make calls. I enjoyed the challenge of not using the SDK as I feel, though I might not have completed the challenge, I pushed myself to gain a new skill.
